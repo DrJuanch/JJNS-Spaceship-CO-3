@@ -1,6 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
-from game.utils.constants import SPACESHIP
+from game.utils.constants import SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Spaceship(Sprite):
     def __init__(self):
@@ -22,10 +22,14 @@ class Spaceship(Sprite):
     def move_left(self):
         if self.rect.left>0:
             self.rect.x -= 10
+        else:
+            self.rect.x = SCREEN_WIDTH 
 
-    def move_right(sef):
+    def move_right(self):
         if self.rect.right< SCREEN_WIDTH:
             self.rect.x +=10
+        else:
+            self.rect.x = 0
     
     def move_up(self):
         if self.rect.y > SCREEN_HEIGHT // 2:
