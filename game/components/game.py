@@ -1,5 +1,5 @@
-from game.components.enemies.enemy_manager import EnemyManager
 import pygame
+from game.components.enemies.enemy_manager import EnemyManager
 from game.components.spaceship import Spaceship
 from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
