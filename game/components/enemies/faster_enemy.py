@@ -45,7 +45,7 @@ class FasterEnemy(Sprite):
         self.moving_index += 1
         if self.rect.y >= SCREEN_HEIGHT - 50:
             self.movement = UP
-        elif self.rect.x <= 0:
+        elif self.rect.y <= 0:
             self.movement = DOWN
             
         if self.moving_index >= self.move_y:
@@ -56,3 +56,5 @@ class FasterEnemy(Sprite):
     def draw(self, screen):
         #El metodo blit es igual al scale solo que uno transforma la imagen y blit lo renderiza, recibe los mismo parametros de la misma manera
         screen.blit(self.image, (self.rect.x, self.rect.y))
+        
+    

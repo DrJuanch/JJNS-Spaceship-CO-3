@@ -23,3 +23,10 @@ class EnemyManager:
         
         for faster_enemy in self.faster_enemies:
             faster_enemy.draw(screen)
+            
+    def delete_enemy(self, enemy):
+        if enemy in self.enemies:
+            self.enemies.remove(enemy)
+        
+        elif enemy in self.faster_enemies:
+            self.faster_enemies.remove(enemy)
