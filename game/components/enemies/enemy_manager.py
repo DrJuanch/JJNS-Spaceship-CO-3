@@ -7,13 +7,12 @@ class EnemyManager:
         self.enemies:list[Enemy] = []
         self.faster_enemies:list[FasterEnemy] = []
         
-    def update(self):
+    def update(self, game):
         if not self.enemies or not self.faster_enemies:
-            self.enemies.append(Enemy())
             self.enemies.append(Enemy())
             self.faster_enemies.append(FasterEnemy())
         for enemy in self.enemies:
-            enemy.update(self.enemies)
+            enemy.update(self.enemies, game)
             
         for faster_enemy in self.faster_enemies:
             faster_enemy.update(self.faster_enemies)
