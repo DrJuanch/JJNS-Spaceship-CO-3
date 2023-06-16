@@ -1,12 +1,12 @@
 import pygame
 import random
 from game.utils.constants import ENEMY_2, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
-from pygame.sprite import Sprite
+from game.components.enemies.enemy import Enemy
 
 
 UP = 'up'
 DOWN = 'down'
-class FasterEnemy(Sprite):
+class FasterEnemy(Enemy):
     MOVEMENTS = [UP, DOWN]
     X_POS_LIST= 20
     Y_POS = [50, 100, 150, 200, 250, 300, 350, 400, 500, 550, 600]
@@ -51,10 +51,3 @@ class FasterEnemy(Sprite):
         if self.moving_index >= self.move_y:
             self.moving_index = 0
             self.movement = UP if self.movement == DOWN else DOWN
-            
-            
-    def draw(self, screen):
-        #El metodo blit es igual al scale solo que uno transforma la imagen y blit lo renderiza, recibe los mismo parametros de la misma manera
-        screen.blit(self.image, (self.rect.x, self.rect.y))
-        
-    

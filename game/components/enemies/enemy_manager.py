@@ -30,3 +30,6 @@ class EnemyManager:
         
         elif enemy in self.faster_enemies:
             self.faster_enemies.remove(enemy)
+            
+    def reset(self):
+        self.enemies = []
