@@ -1,6 +1,7 @@
-from game.utils.constants import BULLET_ENEMY, ENEMY_TYPE, SCREEN_HEIGHT, PLAYER_TYPE, BULLET
 import pygame
 from pygame.sprite import Sprite
+
+from game.utils.constants import BULLET_ENEMY, ENEMY_TYPE, SCREEN_HEIGHT, PLAYER_TYPE, BULLET
 
 class Bullet(Sprite):
     SPEED = 20

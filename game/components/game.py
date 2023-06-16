@@ -2,8 +2,9 @@ from game.components.menu import Menu
 from game.components.bullets.bullet_manager import BulletManager
 import pygame
 from game.components.enemies.enemy_manager import EnemyManager
+from game.components.scores import Score
 from game.components.spaceship import Spaceship
-from game.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
 
 class Game:
@@ -19,8 +20,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 0
         
-        self.score = 0
-        self.death_count = 0
+        self.score = Score()
         
         self.player = Spaceship()
         self.enemy_manager = EnemyManager()
@@ -32,7 +32,7 @@ class Game:
         self.running = True
         while self.running:
             if not self.playing:
-                self.show_menu
+                self.show_menu()
                 
         pygame.display.quit()
         pygame.quit()
@@ -40,7 +40,7 @@ class Game:
     def play(self):
         self.enemy_manager.reset()
         self.playing = True
-        self.score = 0
+        self.score.score
         
         while self.playing:
             self.events()
@@ -63,7 +63,7 @@ class Game:
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
-        self.draw_score()
+        self.score.draw_score(self.screen)
         self.player.draw(self.screen)
         self.enemy_manager.draw(self.screen)
         self.bullet_manager.draw(self.screen)
@@ -79,22 +79,15 @@ class Game:
             self.screen.blit(image, (self.x_pos_bg, self.y_pos_bg - image_height))
             self.y_pos_bg = 0
         self.y_pos_bg += self.game_speed
-        
-    def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 22)
-        text = font.render(f"Score: {self.score}", True, (255, 255, 255))
-        text_rect = text.get_rect()
-        text_rect.center = (1000, 50)
-        self.screen.blit(text, text_rect)
-        
-
+    
     def show_menu(self):
-        if self.death_count > 0:
-            self.menu.update_message("Other message")
-
-        self.menu.draw(self.screen)
-        self.menu.events(self.on_close, self.play)
+        if self.score.death_count > 0:
+            self.menu.update_message("Press any key to play again...")
+            self.menu.draw_menu_after_dead(self.screen)
+        else:
+            self.menu.draw_menu(self.screen)
         
+        self.menu.events(self.on_close, self.play)
     def on_close(self):
         self.playing = False
         self.running = False
