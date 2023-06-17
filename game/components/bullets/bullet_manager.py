@@ -1,6 +1,6 @@
 import pygame
 from game.components.bullets.bullet import Bullet
-from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE
+from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE, SHIELD_TYPE
 
 class BulletManager:
     def __init__(self):
@@ -15,12 +15,15 @@ class BulletManager:
         #coliderect recibe cómo parametro otra recta y dice si se encuentra con otra recta
             if enemy_bullet.rect.colliderect(game.player.rect):
                 self.enemy_bullets.remove(enemy_bullet)
-                game.playing = False
-                game.score.score_list.append(game.score.score)
-                game.score.death_count += 1
-                pygame.time.delay(1000)
-                break
-        
+                if game.player.power_up_type != SHIELD_TYPE:
+                    game.playing = False
+                    game.menu.score.score_list.append(game.menu.score.score)
+                    game.menu.score.death_count += 1
+                    game.menu.score.reset_all()
+                    game.player.reset_position()
+                    pygame.time.delay(1000)
+                    break
+                
         for player_bullet in self.player_bullets:
             player_bullet.update(self.player_bullets)
             
@@ -28,9 +31,9 @@ class BulletManager:
                 if player_bullet.rect.colliderect(enemy):
                     self.player_bullets.remove(player_bullet)
                     game.enemy_manager.delete_enemy(enemy)
-                    game.score.score += 1
-                    game.score.max_score += 1
-                    game.score.score_list.append(game.score.max_score)
+                    game.menu.score.score += 1
+                    game.menu.score.max_score += 1
+                    game.menu.score.score_list.append(game.menu.score.max_score)
                     
     def draw(self, screen):
         all_bullets = self.enemy_bullets + self.player_bullets

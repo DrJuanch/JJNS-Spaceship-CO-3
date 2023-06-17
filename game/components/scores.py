@@ -5,7 +5,7 @@ from game.utils.constants import FONT_STYLE, HALF_SCREEN_HEIGTH, HALF_SCREEN_WID
 
 class Score:
     def __init__(self):
-        self.score_list = []
+        self.score_list = [0]
         self.score = 0
         self.max_score = 0
         self.death_count = 0
@@ -32,5 +32,7 @@ class Score:
         text_rect.center = (first_position, second_position)
         return (text, text_rect)
 
-    def draw(self, screen, message, message_position):
-        return screen.blit(message, message_position)
+    def reset_all(self):
+        self.max_score = 0
+        self.score = 0
+        
