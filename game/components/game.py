@@ -66,6 +66,8 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.menu.score.draw_score(self.screen)
+        self.menu.score.draw_life(self.screen, self)
+        self.menu.score.draw_power_up_time(self.screen, self)
         self.player.draw(self.screen)
         self.enemy_manager.draw(self.screen)
         self.bullet_manager.draw(self.screen)

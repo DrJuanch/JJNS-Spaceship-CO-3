@@ -5,7 +5,7 @@ from game.utils.constants import DEFAULT_TYPE, SPACESHIP, SCREEN_HEIGHT, SCREEN_
 
 class Spaceship(Sprite):
     def __init__(self):
-        self.image = pygame.transform.scale(SPACESHIP, (60, 40))
+        self.image = pygame.transform.scale(SPACESHIP, (55, 65))
         self.rect = self.image.get_rect()
         self.rect.x = 520
         self.rect.y = 500
@@ -13,6 +13,7 @@ class Spaceship(Sprite):
         self.power_up_type = DEFAULT_TYPE
         self.has_power_up = False
         self.power_up_time = 0
+        self.life = 100
     
     def update(self, game, user_input):
         self.shoot(game.bullet_manager, user_input)
@@ -50,9 +51,11 @@ class Spaceship(Sprite):
             bullet = Bullet(self)
             bullet_manager.add_bullet(bullet)
             
-    def reset_position(self):
+    def reset(self):
+        self.set_image()
         self.rect.x = 520
         self.rect.y = 500
+        self.life = 100
         
     def set_image(self, size=(40, 60), image = SPACESHIP):
         self.image = image

@@ -22,12 +22,20 @@ class Score:
         screen.blit(death_styles[0], death_styles[1])
     
     def draw_score(self, screen):
-        score_styles = self.styles(FONT_STYLE, 22, "score ", self.score, 1000, 50)
+        score_styles = self.styles(FONT_STYLE, 22, "score ", self.score, 1000, 50, (255, 255, 255))
         screen.blit(score_styles[0], score_styles[1])
+        
+    def draw_life(self, screen, game):
+        life_styles = self.styles(FONT_STYLE, 22, "life", game.player.life, 80, 50, (255, 255, 255))
+        screen.blit(life_styles[0], life_styles[1])
 
-    def styles(self, font_style, font_size, message, score, first_position, second_position):
+    def draw_power_up_time(self, screen, game):
+        power_up_time = self.styles(FONT_STYLE, 22, "power_time", game.power_up_manager.time, 990, 550, (255, 255, 255))
+        screen.blit(power_up_time[0], power_up_time[1])
+    
+    def styles(self, font_style, font_size, message, score, first_position, second_position, color = (0, 0, 0)):
         font = pygame.font.Font(font_style, font_size)
-        text = font.render(f"{message}: {score}", True, (0, 0, 0))
+        text = font.render(f"{message}: {score}", True, (color))
         text_rect = text.get_rect()
         text_rect.center = (first_position, second_position)
         return (text, text_rect)

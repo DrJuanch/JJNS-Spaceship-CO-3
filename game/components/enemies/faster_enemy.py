@@ -1,6 +1,7 @@
 import pygame
 import random
-from game.utils.constants import ENEMY_2, ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.components.bullets.bullet import Bullet
+from game.utils.constants import ENEMY_2, FASTER_ENEMY_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH
 from game.components.enemies.enemy import Enemy
 
 
@@ -20,7 +21,7 @@ class FasterEnemy(Enemy):
         self.rect = self.image.get_rect()
         self.rect.x = self.X_POS_LIST
         self.rect.y = random.choice(self.Y_POS)
-        self.type = ENEMY_TYPE
+        self.type = FASTER_ENEMY_TYPE
         
         self.speed_x = self.SPEED_X
         self.speed_y = self.SPEED_Y
@@ -29,16 +30,18 @@ class FasterEnemy(Enemy):
         #randint genera un número random entra los numeros dados (a, b)
         self.move_y = random.randint(10, 80)
         self.moving_index = 0
+        self.shooting_time = random.randint(30,50)
         
-    def update(self, ships):
+    def update(self, ships, game):
         self.rect.x += self.speed_x
+        self.shoot(game.bullet_manager)
         if self.movement == UP:
             self.rect.y -= self.speed_y
         else: 
             self.rect.y += self.speed_y
             
         self.update_movement()
-        if self.rect.y >= SCREEN_WIDTH:
+        if self.rect.y > SCREEN_WIDTH:
             ships.remove(self)
         
     def update_movement(self):
@@ -51,3 +54,10 @@ class FasterEnemy(Enemy):
         if self.moving_index >= self.move_y:
             self.moving_index = 0
             self.movement = UP if self.movement == DOWN else DOWN
+            
+    def faster_shoot(self, bullet_manager):
+        current_time = pygame.time.get_ticks()
+        if self.shooting_time <= current_time:
+            faster_bullet = Bullet()
+            bullet_manager.add_bullet(faster_bullet)
+            self.shooting_time += random.randint(50, 100)

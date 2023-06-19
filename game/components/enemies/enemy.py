@@ -30,7 +30,7 @@ class Enemy(Sprite):
         #randint genera un número random entra los numeros dados (a, b)
         self.move_x = random.randint(30, 100)
         self.moving_index = 0
-        self.shooting_time = random.randint(30, 50)
+        self.shooting_time = random.randint(10, 20)
         
     def update(self, ships, game):
         self.rect.y += self.speed_y

@@ -1,13 +1,14 @@
 import pygame
 from pygame.sprite import Sprite
 
-from game.utils.constants import BULLET_ENEMY, ENEMY_TYPE, SCREEN_HEIGHT, PLAYER_TYPE, BULLET
+from game.utils.constants import BULLET_ENEMY, ENEMY_TYPE, FASTER_ENEMY_BULLET, FASTER_ENEMY_TYPE, SCREEN_HEIGHT, PLAYER_TYPE, BULLET
 
 class Bullet(Sprite):
     SPEED = 20
     ENEMY_BULLETS_IMG = pygame.transform.scale(BULLET_ENEMY, (20, 20))
     PLAYER_BULLETS_IMG = pygame.transform.scale(BULLET, (20, 20))
-    BULLETS = {ENEMY_TYPE: ENEMY_BULLETS_IMG, PLAYER_TYPE: PLAYER_BULLETS_IMG}
+    FASTER_ENEMY_BULLET_IMG = pygame.transform.scale(FASTER_ENEMY_BULLET, (100,20))
+    BULLETS = {ENEMY_TYPE: ENEMY_BULLETS_IMG, PLAYER_TYPE: PLAYER_BULLETS_IMG, FASTER_ENEMY_TYPE: FASTER_ENEMY_BULLET_IMG}
     
     def __init__(self, spaceship):
         self.image = self.BULLETS[spaceship.type]
@@ -27,6 +28,13 @@ class Bullet(Sprite):
             
             if self.rect.y <= 0:
                 bullets.remove(self)
+                
+        elif self.owner == FASTER_ENEMY_TYPE:
+            self.rect.y += (self.SPEED + 5)
+            
+            if self.rect.y >= SCREEN_HEIGHT:
+                bullets.remove(self)
+                
     
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
