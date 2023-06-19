@@ -1,6 +1,6 @@
 import pygame
 from game.components.scores import Score
-from game.utils.constants import FONT_STYLE, GAME_OVER, ICON, HALF_SCREEN_HEIGTH, HALF_SCREEN_WIDTH
+from game.utils.constants import FONT_STYLE, GAME_OVER, ICON, HALF_SCREEN_HEIGTH, HALF_SCREEN_WIDTH, RESET
 
 
 class Menu:
@@ -12,6 +12,9 @@ class Menu:
         self.game_over = pygame.transform.scale(GAME_OVER, (650, 80))
         self.game_over_rect = self.game_over.get_rect()
         self.game_over_rect.center = (HALF_SCREEN_WIDTH, HALF_SCREEN_HEIGTH - 100)
+        self.reset = pygame.transform.scale(RESET, (80, 80))
+        self.reset_rect = self.reset.get_rect()
+        self.reset_rect.center = (HALF_SCREEN_WIDTH - 300, HALF_SCREEN_HEIGTH + 10)
         self.update_message(message)
         self.score = Score()
     
@@ -31,6 +34,7 @@ class Menu:
     def draw_menu_after_dead(self, screen):
         screen.blit(self.text, self.text_rect)
         screen.blit(self.game_over, self.game_over_rect)
+        screen.blit(self.reset, self.reset_rect)
         self.score.draw_max_score(screen)
         self.score.draw_deaths(screen)
         pygame.display.update()
