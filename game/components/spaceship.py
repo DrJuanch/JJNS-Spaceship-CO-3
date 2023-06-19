@@ -5,7 +5,7 @@ from game.utils.constants import DEFAULT_TYPE, SPACESHIP, SCREEN_HEIGHT, SCREEN_
 
 class Spaceship(Sprite):
     def __init__(self):
-        self.image = pygame.transform.scale(SPACESHIP, (55, 65))
+        self.image = pygame.transform.scale(SPACESHIP, (40, 60))
         self.rect = self.image.get_rect()
         self.rect.x = 520
         self.rect.y = 500

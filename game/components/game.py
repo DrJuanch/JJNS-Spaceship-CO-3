@@ -88,8 +88,10 @@ class Game:
     def show_menu(self):
         if self.menu.score.death_count > 0:
             self.menu.update_message("Press any key to play again...")
+            self.draw_background()
             self.menu.draw_menu_after_dead(self.screen)
         else:
+            self.draw_background()
             self.menu.draw_menu(self.screen)
         
         self.menu.events(self.on_close, self.play)
