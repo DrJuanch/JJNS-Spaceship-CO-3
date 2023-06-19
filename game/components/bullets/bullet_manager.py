@@ -23,7 +23,6 @@ class BulletManager:
                     game.player.reset()
                     self.reset_bullets()
                     game.menu.score.reset_all()
-                    game.menu.score.score_list.append(game.menu.score.max_score)
                     pygame.time.delay(1500)
                     
         for enemy_bullet in self.enemy_bullets:
@@ -42,7 +41,7 @@ class BulletManager:
                     game.player.reset()
                     self.reset_bullets()
                     game.menu.score.reset_all()
-                    game.menu.score.score_list.append(game.menu.score.max_score)
+                    print(game.menu.score.score_list) 
                     pygame.time.delay(1500)
                 
         for player_bullet in self.player_bullets:
@@ -54,6 +53,9 @@ class BulletManager:
                     game.enemy_manager.delete_enemy(enemy)
                     game.menu.score.score += 1
                     game.menu.score.max_score += 1
+                    game.menu.score.score_list.append(game.menu.score.max_score)
+                    
+                    
             
             for faster_enemy in game.enemy_manager.faster_enemies:
                 if player_bullet.rect.colliderect(faster_enemy):

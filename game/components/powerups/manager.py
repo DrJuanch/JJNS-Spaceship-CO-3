@@ -5,7 +5,7 @@ from game.components.powerups.heart import Heart
 from game.components.powerups.power_up import PowerUp
 
 from game.components.powerups.shield import Shield
-from game.utils.constants import HEART_TYPE, SHIELD_TYPE, SPACESHIP_SHIELD
+from game.utils.constants import DEFAULT_TYPE, HEART_TYPE, POWER_TIME, SHIELD_TYPE, SPACESHIP_SHIELD
 
 
 class Manager:
@@ -13,7 +13,7 @@ class Manager:
         self.power_ups:list[PowerUp] = []
         self.when_appears = random.randint(10000, 15000)
         self.duration = random.randint(3,5)
-        self.time = 500
+        self.time = POWER_TIME
         
     def generate_power(self):
         shield = Shield()
@@ -35,6 +35,7 @@ class Manager:
                 game.player.set_image()
                 self.time = 500
                 game.player.has_power_up = False
+                game.player.power_up_type = DEFAULT_TYPE
                 
         
         for power_up in self.power_ups:

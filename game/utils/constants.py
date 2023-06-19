@@ -42,3 +42,5 @@ ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 FASTER_ENEMY_BULLET = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_3.png"))
 
 FONT_STYLE = 'freesansbold.ttf'
+
+POWER_TIME = 500
