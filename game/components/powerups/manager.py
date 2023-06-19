@@ -33,7 +33,7 @@ class Manager:
             self.time -= 1
             if self.time <= 0:
                 game.player.set_image()
-                self.time = 500
+                self.time = POWER_TIME
                 game.player.has_power_up = False
                 game.player.power_up_type = DEFAULT_TYPE
                 
